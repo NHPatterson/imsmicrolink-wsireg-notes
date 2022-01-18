@@ -1,0 +1,90 @@
+# determines the file names for your project
+# i.e. apl-demo-postAF-registered.ome.tiff
+project_name: apl-demo
+# where you want outputs to go
+output_dir: D:/temp
+# whether to save preprocessed data currently on disk
+cache_images: true
+# top level for all images to be included in registration
+modalities:
+  # top level key is the NAME that will be used for registration
+  postAF:
+    # absolute path to the image
+    image_filepath: C:/Users/pattenh1/Dropbox (VU Basic Sciences)/APOLLO/demo/apl-test-wpad.ome.tiff
+    # image resolution:
+    # Caprioli VU:
+    # 10x Zeiss fluo: 0.65
+    # 20x Zeiss fluo: 0.325
+    # 20x CODEX: 0.325
+    # 20x Zeiss Bright: 0.224
+    # 20x Leica-SCN400: 0.5
+    # 40x Leica-SCN400: 0.25
+    image_res: 0.65
+    # list of names, must match length of channels
+    # otherwise will become C1, C2, etc.
+    # no channel names for RGB images
+    channel_names:
+        - postIMS eGFP
+        - postIMS Brightfield
+    # preprocessing settings
+    preprocessing:
+      # fluorescence image type (options: FL, BF)
+      image_type: FL
+      # enhance contrast automatically (options: true, false)
+      contrast_enhance: true
+      # change data type to consume less memory (options: true, false, recommended!)
+      as_uint8: true
+      # which channels to load in for reg
+      ch_indices: 0 (options: null, single integer, or integer list, if null, max intensity project is performed)
+      # multiple channels:
+      #ch_indices:
+      # - 0
+      # - 1
+      
+  preAF:
+    image_filepath: C:/Users/pattenh1/Dropbox (VU Basic Sciences)/APOLLO/demo/microscopy/P1-D3-treatment_lipids.czi
+    image_res: 0.65
+    channel_names:
+        - DAPI autofluorescence
+        - eGFP autofluorescence
+        - DsRed autofluorescence
+    preprocessing:
+      image_type: FL
+      contrast_enhance: true
+      as_uint8: true
+      ch_indices: 1
+      
+  PAS:
+    image_filepath: C:/Users/pattenh1/Dropbox (VU Basic Sciences)/APOLLO/demo/microscopy/LT3_2021-08-17 16_25_03.scn
+    image_res: 0.5
+    preprocessing:
+      image_type: BF
+      as_uint8: true
+      # rotate the image X degrees counter clockwise
+      rot_cc: -90 # (options: any number, if negative, rotates clockwise)
+      # flip image example
+      # flip: h # (options: h,v for horizontal or vertical coordinate flips)
+      
+# top level key for what registrations should be performed
+reg_paths:
+  # first alignment
+  reg_path_0:
+    # image that will be transformed
+    src_modality_name: preAF
+    # image that wwill be aligned to
+    tgt_modality_name: postAF
+    # whether image should be piped through another modality
+    thru_modality: null
+    # what transformation models to use
+    # options: rigid, affine, similarity, nl, nl_mid
+    # nl is non-rigid transformations recommended for serial sections!
+    reg_params:
+        - rigid
+        - affine
+  reg_path_1:
+    src_modality_name: PAS
+    thru_modality: preAF
+    tgt_modality_name: postAF
+    reg_params:
+        - rigid
+        - affine
