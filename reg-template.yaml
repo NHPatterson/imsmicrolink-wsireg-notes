@@ -7,7 +7,7 @@ output_dir: D:/temp
 cache_images: true
 # top level for all images to be included in registration
 modalities:
-  # top level key is the NAME that will be used for registration
+  # top level key is the NAME that will be used in output files
   postAF:
     # absolute path to the image
     image_filepath: C:/Users/pattenh1/Dropbox (VU Basic Sciences)/APOLLO/demo/apl-test-wpad.ome.tiff
