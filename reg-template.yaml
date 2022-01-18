@@ -35,7 +35,7 @@ modalities:
       # change data type to consume less memory (options: true, false, recommended!)
       as_uint8: true
       # which channels to load in for reg
-      ch_indices: 0 (options: null, single integer, or integer list, if null, max intensity project is performed)
+      ch_indices: 0 # (options: null, single integer, or integer list, if null, max intensity project is performed)
       # multiple channels:
       #ch_indices:
       # - 0
