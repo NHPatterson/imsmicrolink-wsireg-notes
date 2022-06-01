@@ -15,6 +15,7 @@ conda create -y -n napari-env python=3.8
 conda activate napari-env
 pip install "napari[all]"
 pip install wsireg
+pip install napari-wsireg
 pip install napari-imsmicrolink
 ```
 
