@@ -34,6 +34,6 @@ Now `napari-imsmicrolink` should be available as a plugin in the napari plugin m
 Once you have set up your registration .yaml file (see [template](./reg-template.yaml)), you can run registration from the command line like so
 ```bash
 conda activate napari-env
-wsireg "path/to/my-reg-file.yaml"
+wsireg2d "path/to/my-reg-file.yaml"
 ```
 
